@@ -1,3 +1,3 @@
-# Natural Language Processing of Alejandro Cavero's twitter account
+# NLP of Alejandro Cavero's twitter account
 
-Individual assignment for the _Intermediate R_ diploma course at PUCP.
+Natural Language Processing individual assignment for the _Intermediate R_ course at PUCP.
