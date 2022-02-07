@@ -1,0 +1,27 @@
+---
+title: "20220213_NLP-AleCav_Gissela-Cornejo"
+author: "Gissela_Cornejo_Castellano"
+date: "7/2/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r Librerías}
+library(rtweet)
+library(tidyverse)
+library(twitteR)
+library(ROAuth)
+library(httr)
+library(tm)
+library(SnowballC)
+```
+
+# 1. Conseguir la data
+## 1.1 Twitter API Key
+```{r}
+
+```
+
