@@ -53,10 +53,9 @@ write.csv(Cavero, "C:\\Users\\jecas\\Documents\\GitHub\\NLP_AleCav\\Cavero.csv",
 
 ## 1.3 Importar base desde Github, para la reproducibilidad de este Rmd.
 ```{r}
-Github <- ""
+Github <- "https://github.com/gisselacornejocastellano/NLP_AleCav/raw/main/Cavero.csv"
 
-Cavero_Tweets <- import("C:\\Users\\jecas\\Documents\\GitHub\\NLP_AleCav\\Cavero.csv",
-                        encoding = "UTF-8")
+Cavero_Tweets <- import(Github, encoding = "UTF-8")
 ```
 
 
