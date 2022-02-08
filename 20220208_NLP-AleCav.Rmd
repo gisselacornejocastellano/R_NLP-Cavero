@@ -19,6 +19,7 @@ library(ROAuth)
 library(httr)
 library(tm)
 library(SnowballC)
+library(rio)
 ```
 
 # 1. Conseguir la data
@@ -27,10 +28,10 @@ library(SnowballC)
 
 En aras de no usar repetidas veces mis credenciales, una vez extraída la data la exporté como csv. Por esa razón he colocado los siguientes chunks como comentario y he borrado mis claves.
 ```{#r}
-api_key <- "K2pviSkiv84wO7Pnk7IJOcoiw"
-api_secret <- "qfcfxdpvduTQz170CVgtW1krIOSIlLYLbNSlYZM5lubRxsTVeq"
-access_token <- "814222538440134657-DlkjGkZqQuCng4ryXlvogShIbQB0jXd"
-access_token_secret <- "4XwJH8VwpG2N9dghqHMaIpptyFTrdQNFWx31U3NYUI0Uh"
+api_key <- ""
+api_secret <- ""
+access_token <- ""
+access_token_secret <- ""
 ```
 
 ```{#r}
@@ -41,7 +42,7 @@ setup_twitter_oauth(api_key,api_secret,access_token,access_token_secret)
 Cavero <- get_timeline("@AlejandroCavero", 1000)
 ```
 
-## Exportar la base de datos a csv, como respaldo para no volver a usar las credenciales si lo vuelvo a necesitar.
+## 1.2 Exportar la base de datos a csv, como respaldo para no volver a usar las credenciales si lo vuelvo a necesitar.
 ```{#r}
 Cavero <- apply(Cavero,2,as.character)
 ```
@@ -50,6 +51,12 @@ Cavero <- apply(Cavero,2,as.character)
 write.csv(Cavero, "C:\\Users\\jecas\\Documents\\GitHub\\NLP_AleCav\\Cavero.csv", row.names=FALSE)
 ```
 
+## 1.3 Importar base desde Github, para la reproducibilidad de este Rmd.
+```{r}
+Github <- ""
 
+Cavero_Tweets <- import("C:\\Users\\jecas\\Documents\\GitHub\\NLP_AleCav\\Cavero.csv",
+                        encoding = "UTF-8")
+```
 
 
