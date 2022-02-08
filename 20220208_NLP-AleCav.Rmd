@@ -1,0 +1,41 @@
+---
+title: "Análisis de la cuenta de Alejando Cavero"
+author: "Gissela_Cornejo_Castellano"
+date: "8/2/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(rtweet)
+library(tidyverse)
+library(twitteR)
+library(ROAuth)
+library(httr)
+library(tm)
+library(SnowballC)
+```
+
+```{#r}
+api_key <- "K2pviSkiv84wO7Pnk7IJOcoiw"
+api_secret <- "qfcfxdpvduTQz170CVgtW1krIOSIlLYLbNSlYZM5lubRxsTVeq"
+access_token <- "814222538440134657-DlkjGkZqQuCng4ryXlvogShIbQB0jXd"
+access_token_secret <- "4XwJH8VwpG2N9dghqHMaIpptyFTrdQNFWx31U3NYUI0Uh"
+```
+
+
+```{#r}
+setup_twitter_oauth(api_key,api_secret,access_token,access_token_secret)
+```
+
+```{#r}
+Cavero <- get_timeline("@AlejandroCavero", 1000)
+```
+
+
+
+
+
