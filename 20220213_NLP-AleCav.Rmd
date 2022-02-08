@@ -17,10 +17,24 @@ library(ROAuth)
 library(httr)
 library(tm)
 library(SnowballC)
+library(openssl)
+library(httpuv)
+library(base64enc)
 ```
 
 # 1. Conseguir la data
+
 ## 1.1 Twitter API Key
+```{r}
+api_key <- "MPLduNmXsbHmi9yZJa7HDuaKp"
+api_secret <- "5oHJJRcttZO5BPx8woyPBIkX2DwR2OBnpaGK5d2TFX3E37aUIJ"
+access_token <- "814222538440134657-3kwagTDcyWiP61qL54no242PVFS6NWs"
+access_token_secret <- "neWeyimt8u8w05agLbUmS8gSLkgh1nNOZuD14UAnxHFQM"
+
+setup_twitter_oauth(api_key,api_secret,access_token,access_token_secret)
+```
+
+## 1.2 Extraer data de @AlejandroCavero
 ```{r}
 
 ```
