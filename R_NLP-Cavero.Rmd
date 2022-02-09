@@ -78,8 +78,34 @@ length(Cavero_Text)
 content(Corpus[1])
 ```
 ## 2.2 Transformación de texto
-```{r}
+```{r Minúsculas}
 content(Corpus[1])
+Corpus <- tm_map(Corpus,content_transformer(tolower)) 
+content(Corpus[1])
+```
 
+```{r Eliminar links}
+content(Corpus[1])
+Quitar_URL <- function(x) gsub("http[^[:space:]]*", "", x)
+Corpus <- tm_map(Corpus, content_transformer(Quitar_URL))
+content(Corpus[1])
+```
+```{r Eliminar tildes}
+content(Corpus[1])
+Quitar_Tilde <- function(x) chartr('áéíóú','aeiou',x)
+Corpus <- tm_map(Corpus, Quitar_Tilde)
+content(Corpus[1])
+```
+```{r Eliminar '?'}
+content(Corpus[1])
+Quitar_Interrogacion <- function(x) chartr('?','n',x)
+Corpus <- tm_map(Corpus, Quitar_Interrogacion)
+content(Corpus[1])
+```
+```{r}
+content(micorpus[1])
+removerUSUARIOS <- function(x) gsub("@\\w+", "", x)
+micorpus <- tm_map(micorpus, removerUSUARIOS)
+content(micorpus[1])
 ```
 
