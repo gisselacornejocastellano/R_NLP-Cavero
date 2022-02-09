@@ -75,4 +75,7 @@ Cavero_Tweets
 Corpus <- Corpus(VectorSource(Cavero_Tweets))
 length(Cavero_Tweets)
 ```
+```{r}
+
+```
 
