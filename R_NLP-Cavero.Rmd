@@ -271,7 +271,7 @@ rect.hclust(fit, k = 5)
 
 ## 4.3 Análisis de sentimientos
 
-### Análisis de sentimientos con el paquete TM:
+### Análisis de sentimientos con el paquete {SentimentAnalysis}:
 ```{r Análisis de cada tweet entero}
 Sentimientos_tm <- analyzeSentiment(Cavero_Text,language = "spanish")
 head(Sentimientos_tm)
@@ -286,7 +286,7 @@ Sentimientos_tm_df
 table(Sentimientos_tm_df$sentiment)
 ```
 
-#### Plotear los Sentimientos del paquete TM con Cantidad
+#### Plotear los Sentimientos del paquete SentimentAnalysis
 
 ```{r}
 Sentimientos_tm_df |> 
@@ -294,7 +294,7 @@ Sentimientos_tm_df |>
   summarise(Cantidad = n() ) |> 
   ggplot(aes(x = sentiment,y=Cantidad)) +
   geom_bar(aes(fill=sentiment),stat = "identity") +
-  xlab("Sentimientos") + ylab("Cantidad") + ggtitle("Sentimentos de A. Cavero, según paquete {tm}") + 
+  xlab("Sentimientos") + ylab("Cantidad") + ggtitle("Sentimentos de A. Cavero, según el paquete {SentimentAnalysis}") + 
   theme(legend.position = "none")
 ```
 ```{r}
