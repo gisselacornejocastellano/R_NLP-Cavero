@@ -261,25 +261,6 @@ Sentimientos_tm <- analyzeSentiment(Cavero_Text,language = "spanish")
 head(Sentimientos_tm)
 ```
 
-```{#r}
-sentimientos <- analyzeSentiment(textolimpio,language = "spanish")
-
-sentimientos_final <- data.frame(textolimpio,
-                               sentiment = convertToDirection(sentimientos$SentimentGI))
-head(sentimientos_final)
-str(sentimientos_final)
-table(sentimientos_final$sentiment)
-
-sentimientos_final$score <- 0
-sentimientos_final$score[sentimientos_final$sentiment == "positive"] <- 1
-sentimientos_final$score[sentimientos_final$sentiment == "negative"] <- -1
-
-head(sentimientos_final)
-table(sentimientos_final$score)
-```
-
-
-
 ```{r}
 Sentimientos_tm_df <- data.frame(Cavero_Text,
                                sentiment = convertToDirection(Sentimientos_tm$SentimentGI))
@@ -301,24 +282,18 @@ Sentimientos_tm_df |>
   theme(legend.position = "none")
 ```
 
-
-```{r}
-Sentimientos_final$score <- 0
-Sentimientos_final$score[Sentimientos_final$sentiment == "positive"] <- 1
-Sentimientos_final$score[Sentimientos_final$sentiment == "negative"] <- -1
-```
-
-```{r}
-head(Sentimientos_final)
-table(Sentimientos_final$score)
-```
-
+# Sentimientos según función get_nrc_sentiment del paquete {syuzhet}
 ```{r}
 #fetch sentiment words from texts
 lang <- "spanish"
-Otros_Sentimientos <- get_nrc_sentiment(Cavero_Text, language=lang)
-head(Sentiment)
-Sentimientos_Agregados <- cbind(Cavero_Text,Otros_Sentimientos)
+Sentimientos_nrc <- get_nrc_sentiment(Cavero_Text, language=lang)
+#Sentimientos_nrc_2 <- cbind(Cavero_Text,Sentimientos_nrc)
+head(Sentimientos_nrc)
+
+Sentimientos_nrc |> 
+  
+
+
 ```
 
 ```{r}
