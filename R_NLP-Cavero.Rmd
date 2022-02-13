@@ -278,35 +278,27 @@ Sentimientos_tm_df |>
   summarise(Cantidad = n() ) |> 
   ggplot(aes(x = sentiment,y=Cantidad)) +
   geom_bar(aes(fill=sentiment),stat = "identity") +
-  xlab("Sentimientos") + ylab("Cantidad") + ggtitle("Sentimentos de A. Cavero, según paquete 'tm'") + 
+  xlab("Sentimientos") + ylab("Cantidad") + ggtitle("Sentimentos de A. Cavero, según paquete {tm}") + 
   theme(legend.position = "none")
 ```
 
-# Sentimientos según función get_nrc_sentiment del paquete {syuzhet}
+### Sentimientos según función get_nrc_sentiment del paquete {syuzhet}
 ```{r}
 #fetch sentiment words from texts
 lang <- "spanish"
 Sentimientos_nrc <- get_nrc_sentiment(Cavero_Text, language=lang)
 #Sentimientos_nrc_2 <- cbind(Cavero_Text,Sentimientos_nrc)
 head(Sentimientos_nrc)
-
-Sentimientos_nrc |> 
-  
-
-
 ```
 
+### Plotear sentimientos extraídos por el paquete {syuzhet}
 ```{r}
-method <- "nrc"
-lang <- "spanish"
-my_text_values <- get_sentiment(Cavero_Text, method = "method", language = "spanish")
-my_text_values[1:10] #The values are the model’s assessment of the sentiment in each sentence
-```
-
-```{#r}
-corpusLDA <- lexicalize(Corpus)
-ldaModel=lda.collapsed.gibbs.sampler(corpusLDA$documents,K=5,vocab=Corpus$vocab,burnin=9999,num.iterations=1000,alpha=0.7,eta=0.1)
-top.words <- top.topic.words(ldaModel$topics, 8, by.score=TRUE)
-print(top.words) 
+Sentimientos_nrc |> 
+  summarise_all(sum) |> 
+  gather(key=Sentimiento, value=Number) |> 
+  ggplot(aes(x=Sentimiento,fill=Sentimiento)) + 
+  geom_bar(aes(x = Sentimiento, y = Number), position = "dodge", stat = "identity") +
+  xlab("Sentimientos") + ylab("Cantidad") + ggtitle("Sentimentos de A. Cavero, según paquete {syuzhet}") +
+  theme(legend.position = "none")
 ```
 
