@@ -81,8 +81,15 @@ Es_Retweet <- Cavero_All_Tweets |>
   summarise(Cantidad = n()) |> 
   ggplot(aes(x = is_retweet, y = Cantidad, fill = is_retweet)) +
   geom_bar(position = "dodge", stat = 'identity') + 
-  xlab('¿Es retweet?')
+  xlab('¿Es retweet?') + 
+  ggtitle("Retweets y tweets propios de A. Cavero") + 
+  theme(legend.position = "none")
 Es_Retweet
+```
+
+```{#r Guardar gráfico para el reporte}
+ggsave("es_retweet.png", Es_Retweet,
+       height = 4, width = 5, units = "in", dpi = 458)
 ```
 
 
@@ -207,12 +214,24 @@ Cavero_DF
 ```
 
 ## 3.3 Frecuencia de palabras
+
 ```{r}
-Cavero_DF2 <- Cavero_DF
-hist(Cavero_DF2$freq)
 Cavero_DF2 <- subset(Cavero_DF2, Cavero_DF2$freq >= 10)
 Cavero_DF2
 ```
+
+
+```{r}
+hist(Cavero_DF2$freq)
+```
+
+
+```{r Guardar gráfico para el reporte}
+jpeg(file="hist1.jpeg")
+hist(Cavero_DF2$freq)
+dev.off()
+```
+
 
 ## 3.4 Gráficos
 ```{r}
@@ -229,6 +248,16 @@ barplot(Cavero_DF2[1:20,]$freq, las = 2, names.arg = Cavero_DF2[1:20,]$Palabra,
         col ="gold", main ="Top 5 palabras más frecuentes",
         ylab = "Palabras más frecuentes")
 ```
+
+
+```{r Guardar barplot de palabras más usadas en el mismo chunk}
+jpeg(file="barplot.jpeg")
+barplot(Cavero_DF2[1:20,]$freq, las = 2, names.arg = Cavero_DF2[1:20,]$Palabra,
+        col ="gold", main ="Top 5 palabras más frecuentes",
+        ylab = "Palabras más frecuentes")
+dev.off()
+```
+
 ## 3.5 Wordcloud
 ```{r}
 #head(Cavero_DF)
@@ -272,7 +301,7 @@ rect.hclust(fit, k = 5)
 ## 4.3 Análisis de sentimientos
 
 ### Análisis de sentimientos con el paquete {SentimentAnalysis}:
-```{r Análisis de cada tweet entero}
+```{r}
 Sentimientos_tm <- analyzeSentiment(Cavero_Text,language = "spanish")
 head(Sentimientos_tm)
 ```
@@ -307,7 +336,16 @@ p2 <- Sentimientos_tm_df |>
 p2
 ```
 
-### Análisis de sentimientos según función get_nrc_sentiment del paquete {syuzhet}
+```{r Promedio de caracteres de los tweets de Cavero}
+ Sentimientos_tm_df2 <- Sentimientos_tm_df |> 
+  mutate(title_len = str_length(Cavero_Text))
+
+Sentimientos_tm_df2$title_len <- as.numeric(Sentimientos_tm_df2$title_len)
+mean(Sentimientos_tm_df2$title_len) 
+```
+
+
+### Análisis de sentimientos según función get_nrc_sentiment del paquete    
 ```{r}
 # Este paquete asocia textos a 8 emociones y 2 sentimientos. Tanto más excede el valor a 0, más pronunciada es la emoción o sentimiento.
 lang <- "spanish"
@@ -321,9 +359,25 @@ head(Sentimientos_nrc)
 Cavero_angry <- which(Sentimientos_nrc$anger > 0)
 head(Cavero_Text[Cavero_angry])
 ```   
+### Ejemplo de tweets que demuestran "joy"
+```{r}
+Cavero_joy <- which(Sentimientos_nrc$joy > 0)
+head(Cavero_Text[Cavero_joy])
+```
+```{r}
+Cavero_sad <- which(Sentimientos_nrc$sadness > 0)
+head(Cavero_Text[Cavero_sad])
+```
 
 
 #### Plotear sentimientos extraídos por el paquete {syuzhet}
+
+```{r}
+Sentimientos_nrc |> 
+  summarise_all(sum) |> 
+  gather(key = Sentimiento, value = Number)
+```
+
 ```{r}
 Sentimientos_nrc |> 
   summarise_all(sum) |> 
