@@ -42,6 +42,7 @@ access_token_secret <- ""
 
 ```{#r}
 setup_twitter_oauth(api_key,api_secret,access_token,access_token_secret)
+auth_setup_default()
 ```
 
 ## 1.2 Extraer tweets
@@ -50,7 +51,7 @@ Cavero <- get_timeline("@AlejandroCavero", 1000)
 ```
 
 ```{#r}
-Cavero2 <- tweets_data(Cavero)
+# Cavero2 <- tweets_data(Cavero) --> ya no sirve al 2022-07-28
 head(Cavero2)
 ```
 
